@@ -14,7 +14,6 @@ class MessageThreadsTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("View Will Appear 1")
 
         messageThreadController.fetchMessageThreads {
             DispatchQueue.main.async {
