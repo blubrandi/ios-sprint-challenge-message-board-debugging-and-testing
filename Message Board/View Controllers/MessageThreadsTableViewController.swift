@@ -18,8 +18,7 @@ class MessageThreadsTableViewController: UITableViewController {
 
         messageThreadController.fetchMessageThreads {
             DispatchQueue.main.async {
-//                self.tableView.reloadData()
-                // When the tableview reloads data, threads aren't displayed.  Probably because we're not pulling from the db.
+                self.tableView.reloadData()
             }
         }
     }

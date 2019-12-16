@@ -16,3 +16,10 @@ Commented out self.tableView.reloadData() in the viewWillAppear() method in Mess
 
 Also updated to Swift 5 in this step to eliminate the warning in Xcode and moved properties to the top of the file in some files, and reformatted some non-affected/relevant code.
 
+## 4 (& 5?)  Send button in MessageDetailViewController doesn't create message, and when you go back to the root view controller from trying to add a message and clicking on the thread again, the app crashes and you get the following error:
+
+`Fatal error: Index out of range`
+
+Corrected segue typo from AddMesage to AddMessage.  Added popViewController method in sendMessage action.
+
+Also rewrote the code to decode the dictionary and messages appear in the MessageThreadsTableViewController.  Fetched Messages appear from db and app no longer crashes.
