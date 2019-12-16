@@ -20,22 +20,23 @@ class MessageThread: Codable, Equatable {
         case identifier
     }
 
-    init(title: String, messages: [MessageThread.Message] = [], identifier: String = UUID().uuidString) {
-        self.title = title
-        self.messages = messages
-        self.identifier = identifier
-    }
-
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: MessageThreadCodingKeys.self)
         
         let title = try container.decode(String.self, forKey: .title)
-        let identifier = try container.decode(String.self, forKey: .identifier)
         let messages = try container.decode([String: Message].self, forKey: .messages).compactMap { $0.value }
+        let identifier = try container.decode(String.self, forKey: .identifier)
         
         self.title = title
-        self.identifier = identifier
         self.messages = messages
+        self.identifier = identifier
+
+    }
+    
+    init(title: String, messages: [MessageThread.Message] = [], identifier: String = UUID().uuidString) {
+        self.title = title
+        self.messages = messages
+        self.identifier = identifier
     }
 
     
@@ -71,7 +72,7 @@ class MessageThread: Codable, Equatable {
         }
     }
     
-    static func ==(lhs: MessageThread, rhs: MessageThread) -> Bool {
+    static func == (lhs: MessageThread, rhs: MessageThread) -> Bool {
         return lhs.title == rhs.title &&
             lhs.identifier == rhs.identifier &&
             lhs.messages == rhs.messages

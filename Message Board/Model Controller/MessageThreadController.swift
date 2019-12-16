@@ -32,13 +32,16 @@ class MessageThreadController {
                 return
             }
             
-            guard let data = data else { NSLog("No data returned from data task"); completion(); return }
+            guard let data = data else {
+                NSLog("No data returned from data task")
+                completion()
+                return
+            }
             
             do {
-                self.messageThreads = try Array(decoder.decode([String: MessageThread].self, from: data).values)
+                self.messageThreads = Array(try decoder.decode([String: MessageThread].self, from: data).values)
             } catch {
                 self.messageThreads = []
-                print(self.messageThreads)
                 NSLog("Error decoding message threads from JSON data: \(error)")
             }
             completion()
@@ -89,7 +92,7 @@ class MessageThreadController {
             return
         }
         
-        guard let index = messageThreads.index(of: messageThread) else { completion(); return }
+        guard let index = messageThreads.firstIndex(of: messageThread) else { completion(); return }
         
         let message = MessageThread.Message(text: text, sender: sender)
         messageThreads[index].messages.append(message)

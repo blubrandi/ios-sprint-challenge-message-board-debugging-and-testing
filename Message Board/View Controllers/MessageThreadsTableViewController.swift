@@ -9,13 +9,17 @@
 import UIKit
 
 class MessageThreadsTableViewController: UITableViewController {
+    
+    let messageThreadController = MessageThreadController()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        print("View Will Appear 1")
+
         messageThreadController.fetchMessageThreads {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+//                self.tableView.reloadData()
+                // When the tableview reloads data, threads aren't displayed.  Probably because we're not pulling from the db.
             }
         }
     }
@@ -63,8 +67,6 @@ class MessageThreadsTableViewController: UITableViewController {
     }
     
     // MARK: - Properties
-    
-    let messageThreadController = MessageThreadController()
     
     @IBOutlet weak var threadTitleTextField: UITextField!
 }
